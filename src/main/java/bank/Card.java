@@ -3,41 +3,36 @@ package bank;
 public class Card {
 
 
-    private final long CARD_NUMBER;
-    private int pinCode;
+    private final String CARD_NUMBER;
+    private String pinCode;
 
-    public Card (long CARD_NUMBER){
-        this.CARD_NUMBER=CARD_NUMBER;
-         generatePinCode();
+    public Card (){
+        this.CARD_NUMBER= generateNumbers(16);
+         this.pinCode = generateNumbers(4);
         }
 
-    private void generatePinCode() {
-        StringBuilder generatingPin = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            generatingPin.append(rnd(0, 9));
+    private String generateNumbers(int amount) {
+        StringBuilder number = new StringBuilder();
+        for (int i = 0; i < amount; i++) {
+            number.append(rnd(0, 9));
 
         }
-        pinCode = Integer.parseInt(generatingPin.toString());
+        return number.toString();
     }
-    public long getCARD_NUMBER() {
+
+    public String getCARD_NUMBER() {
         return CARD_NUMBER;
     }
 
-    public int getPinCode(){
+    public String getPinCode(){
         return pinCode;
 
     }
 
-    public void setPinCode(int pinCode) {
+    public void setPinCode(String pinCode) {
         this.pinCode = pinCode;
     }
 
-    public static void main (String[] args){
-        Card firstCard = new Card ( 1234567897777777L);
-        System.out.println("Номер карты:" + firstCard.getCARD_NUMBER());
-        System.out.println("ПИН " +firstCard.getPinCode());
-
-    }
     public static int rnd (int min,int max){
         max-= min;
         return (int) (Math.random() *++ max) + min;
